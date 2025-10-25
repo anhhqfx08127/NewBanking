@@ -7,7 +7,7 @@ import state.ActiveState
 data class BankAccount(
     val account: Account,
     var balance: Double = 0.0,
-    val state: AccountState = ActiveState()
+    var state: AccountState = ActiveState()
 ) {
     val history = TransactionHistory(
 

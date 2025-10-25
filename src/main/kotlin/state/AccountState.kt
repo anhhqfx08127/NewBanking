@@ -48,10 +48,48 @@ class ActiveState : AccountState {
     }
 
     override fun freeze(account: BankAccount) {
-        println("Account has been frozen")
+        account.state = FreezeState()
+        println("The account has been frozen")
     }
 
     override fun close(account: BankAccount) {
-        println("Account has been closed")
+        println("The account has been closed")
+    }
+}
+
+class FreezeState : AccountState {
+    override fun deposit(account: BankAccount, amount: Double, fee: Double, description: String) {
+        println("The account is frozen and cannot be deposited.")
+    }
+
+    override fun withdraw(account: BankAccount, amount: Double, fee: Double, description: String) {
+        println("The account is frozen and cannot be withdrawn")
+    }
+
+    override fun freeze(account: BankAccount) {
+        println("The account has been frozen and cannot be frozen again.")
+    }
+
+    override fun close(account: BankAccount) {
+        account.state = CloseState()
+        println("The account has been closed")
+    }
+}
+
+class CloseState : AccountState {
+    override fun deposit(account: BankAccount, amount: Double, fee: Double, description: String) {
+        println("The account is closed and cannot be deposited.")
+    }
+
+    override fun withdraw(account: BankAccount, amount: Double, fee: Double, description: String) {
+        println("The account is closed and cannot be withdrawn")
+    }
+
+    override fun freeze(account: BankAccount) {
+        println("The account has been closed and cannot be frozen.")
+    }
+
+    override fun close(account: BankAccount) {
+        println("The account has been closed and cannot be closed again.")
     }
 }
