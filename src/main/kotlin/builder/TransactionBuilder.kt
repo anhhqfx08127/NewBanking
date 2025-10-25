@@ -3,6 +3,7 @@ package builder
 import BankAccount
 import BasicTransaction
 import decorator.LoggingDecorator
+import decorator.NotificationDecorator
 import decorator.Transaction
 import strategy.FeeStrategy
 import strategy.NoFee
@@ -14,6 +15,7 @@ class TransactionBuilder {
     private var feeStrategy: FeeStrategy = NoFee()
 
     private var withNotify: Boolean = false
+    private var withLogging: Boolean = false
 
     fun setAccount(account: BankAccount) = apply { this.account = account }
     fun setAmount(amount: Double) = apply { this.amount = amount }
@@ -21,6 +23,7 @@ class TransactionBuilder {
     fun setFeeStrategy(feeStrategy: FeeStrategy) = apply { this.feeStrategy = feeStrategy }
 
     fun enableNotify() = apply { this.withNotify = true }
+    fun enableLogging() = apply { this.withLogging = true }
 
     fun build(): Transaction {
         return account?.let { account ->
@@ -32,6 +35,9 @@ class TransactionBuilder {
             )
 
             if (withNotify) {
+                transaction = NotificationDecorator(transaction, account)
+            }
+            if(withLogging) {
                 transaction = LoggingDecorator(transaction)
             }
 

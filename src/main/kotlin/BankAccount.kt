@@ -9,9 +9,7 @@ data class BankAccount(
     var balance: Double = 0.0,
     var state: AccountState = ActiveState()
 ) {
-    val history = TransactionHistory(
-
-    )
+    val history = TransactionHistory()
     val observers = mutableListOf<AccountObserver>()
 
     fun addObserver(observer: AccountObserver) {

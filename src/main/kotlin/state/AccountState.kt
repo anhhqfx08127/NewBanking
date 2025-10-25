@@ -23,7 +23,6 @@ class ActiveState : AccountState {
         println("New balance: $newBalance")
 
         account.balance = newBalance
-        account.notifyObservers()
     }
 
     override fun withdraw(account: BankAccount, amount: Double, fee: Double, description: String) {
@@ -44,7 +43,6 @@ class ActiveState : AccountState {
         println("New balance: $newBalance")
 
         account.balance = newBalance
-        account.notifyObservers()
     }
 
     override fun freeze(account: BankAccount) {

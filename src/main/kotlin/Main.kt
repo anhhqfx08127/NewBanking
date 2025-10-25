@@ -39,6 +39,7 @@ fun main() {
         .setDescription("Hello deposit")
         .setFeeStrategy(fixedFee)
         .enableNotify()
+        .enableLogging()
         .build()
 
     depositTransaction.execute()
@@ -51,6 +52,7 @@ fun main() {
         .setDescription("Hello withdraw")
         .setFeeStrategy(percentFee)
         .enableNotify()
+        .enableLogging()
         .build()
 
     withdrawTransaction.execute()
@@ -61,6 +63,7 @@ fun main() {
         .setDescription("Hello salary")
         .setFeeStrategy(noFee)
         .enableNotify()
+        .enableLogging()
         .build()
 
     salaryTransaction.execute()
